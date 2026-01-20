@@ -1,0 +1,34 @@
+# FastAPI and Web
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Database
+sqlalchemy
+asyncpg
+psycopg2-binary
+alembic
+
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==4.0.1
+# Redis and Celery
+redis
+celery
+
+# HTTP Client
+httpx
+aiohttp
+
+# Validation and Utils
+pydantic
+pydantic-settings
+python-dotenv
+
+# NLP for summarization and keyword extraction
+nltk
+rake-nltk
+
+# Date handling
+python-dateutil

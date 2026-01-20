@@ -1,0 +1,17 @@
+.env
+.env.*
+
+# Virtual environments
+venv/*
+env/
+ENV/
+.venv/
+venv/lib
+/home/web-h-053/intership/ai-mcp-project/new-project/ai_news_intelligence_backend/venv/lib/python3.10/site-packages/asyncpg/__init__.py
+
+/app/__pycache__/
+/app/api/__pycache__/
+/app/core/__pycache__/
+/app/db/__pycache__/
+/app/services/__pycache__/
+/app/workers/__pycache__/
