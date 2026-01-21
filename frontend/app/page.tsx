@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { adminApi } from '@/lib/api';
+import { useAuth } from '@/lib/auth-context';
 import {
   StatCard,
   ArticlesChart,
@@ -12,10 +14,19 @@ import {
 import { AnalyticsResponse } from '@/types';
 
 export default function DashboardPage() {
+  const router = useRouter();
+  const { isAdmin, user } = useAuth();
   const [analytics, setAnalytics] = useState<AnalyticsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+
+  // Redirect non-admin users to articles
+  useEffect(() => {
+    if (user && !isAdmin) {
+      router.push('/articles');
+    }
+  }, [user, isAdmin, router]);
 
   const fetchAnalytics = async () => {
     try {
