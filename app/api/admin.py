@@ -266,14 +266,20 @@ def trigger_article_processing(
     Manually trigger article processing task.
     Admin only.
     """
-    from app.workers.celery_worker import process_new_articles
-    
-    task = process_new_articles.delay()
-    
-    return {
-        "message": "Processing task triggered",
-        "task_id": task.id
-    }
+    try:
+        from app.workers.celery_worker import process_new_articles
+        
+        task = process_new_articles.delay()
+        
+        return {
+            "message": "Processing task triggered",
+            "task_id": task.id
+        }
+    except (ConnectionError, RuntimeError) as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Redis/Celery is not available. Please start Redis server: sudo systemctl start redis or redis-server"
+        )
 
 
 @router.post("/trigger-fetch")
@@ -283,11 +289,17 @@ def trigger_news_fetch(
     Manually trigger news fetch task.
     Admin only.
     """
-    from app.workers.celery_worker import fetch_and_store_news
-    
-    task = fetch_and_store_news.delay()
-    
-    return {
-        "message": "Fetch task triggered",
-        "task_id": task.id
-    }
+    try:
+        from app.workers.celery_worker import fetch_and_store_news
+        
+        task = fetch_and_store_news.delay()
+        
+        return {
+            "message": "Fetch task triggered",
+            "task_id": task.id
+        }
+    except (ConnectionError, RuntimeError) as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Redis/Celery is not available. Please start Redis server: sudo systemctl start redis or redis-server"
+        )

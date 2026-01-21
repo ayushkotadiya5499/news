@@ -8,6 +8,7 @@ ENV/
 .venv/
 venv/lib
 /home/web-h-053/intership/ai-mcp-project/new-project/ai_news_intelligence_backend/venv/lib/python3.10/site-packages/asyncpg/__init__.py
+venv
 
 /app/__pycache__/
 /app/api/__pycache__/
@@ -15,3 +16,11 @@ venv/lib
 /app/db/__pycache__/
 /app/services/__pycache__/
 /app/workers/__pycache__/
+
+.pids
+text.txt
+run copy.sh
+test.sh
+celery-beat.log
+celery-worker.log
+celerybeat-schedule
